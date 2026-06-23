@@ -6,7 +6,12 @@ app.get('/', (req, res)=> {
 
 app.post('/users', (req,res)=> res.status(201).json({created: true}));
 //route parameters 
-app.put('/users:id', (req,res) => res.json({update}))
+app.get('/users:id', (req,res) => res.json({id: req.params.id}))
+// GET /search?q=node&page=2 
+app.get('/search', (req,res)=> {
+    const {q,page = '1'} = req.query;
+    req.json({query: q, page: Number(page)});
+})
 
 app.listen(3000, ()=>{
     console.log('Listening on http://localhost:3000'); 
